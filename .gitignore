@@ -142,3 +142,5 @@ cython_debug/
 # My Files 
 # data/
 .devcontainer/.env
+
+.DE_Store

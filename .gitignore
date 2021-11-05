@@ -143,4 +143,4 @@ cython_debug/
 # data/
 .devcontainer/.env
 
-.DE_Store
+.DS_Store

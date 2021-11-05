@@ -1,240 +1,174 @@
 # -*- coding: utf-8 -*-
-"""Parse pdfs to structured PressBriefing dicts. The pdf text is extracted and than parsed 
-using simple regex matching.
+"""Process the pdf transcripts into structured objects.
 
-Todo:
-    * Improve parser to be more robust
-    * retrieve video url from website !not in pdf!
+Examples:
+    head, body = parse_pdf.read_pdf("path/to/pdf")
+    
+    metadata = parse_pdf.parse_head(head)
+    passages = parse_pdf.parse_body(body)
+
+Exceptional documents:
+    The following documents do not provide a timecode at the same line as the speaker and therefor cannot be parsed 
+    by the body parser:
+    - Transkript_Atomenergie-und-Klimawandel_SMC-PressBriefing_2020-02-26.pdf
+    - Transkript_CO2-Emissionen-im-Corona-Jahr_SMC-Press-Briefing_2020-12-10.pdf
+    - Transkript_Die-_neue-GAP_SMC-Press-Briefing_20210316.pdf
+    - Transkript_gesundeStaedte_vPressBriefing_30112020.pdf
+
+    - Transkript_SMC_Press_Briefing_Machine_Learning_Medizin_180518.pdf
+
+    The following documents have a divergent metadata page and therefor cannot or only partyally be parsed by the 
+    head parser:
+    - Transkript_Nationaler-Wasserdialog_vPB_2020-08-27.pdf
+    - Transkript_SMC_Press_Briefing_Machine_Learning_Medizin_180518.pdf
+    
+    - Transkript_Befuerchteter_Personalmangel-auf-den-Intensivstationen_SMC-Press-Briefing_2020-10-30.pdf
+    - Transkript_Heinsberg-Studie_Ergebnisse_SMC-Press-Briefing_2020-05-04.pdf
+    - Transkript_Tests_Quarantaene_Press_Briefing_09042020.pdf
+    - Transkript_Welche_Langzeitstrategie-ist-im-Umgang-mit-SARS-CoV-2-die-zielfuehrende_SMC-Press-Briefing-2021-02-01.pdf
 """
 
 import io
 import re
-from typing import Any, Match, Pattern, Optional, Union
+from typing import Any, Union
 
-from bs4 import BeautifulSoup  # type: ignore
 from pdfminer.converter import TextConverter  # type: ignore
 from pdfminer.layout import LAParams  # type: ignore
 from pdfminer.pdfdocument import PDFDocument  # type: ignore
-from pdfminer.pdfinterp import PDFResourceManager, PDFPageInterpreter  # type: ignore
+from pdfminer.pdfinterp import PDFPageInterpreter, PDFResourceManager  # type: ignore
 from pdfminer.pdfpage import PDFPage  # type: ignore
 from pdfminer.pdfparser import PDFParser  # type: ignore
 
-"""Functions to work with texts.
 
-Todo:
-    * make unicode character deletion more general.
-"""
-import re
-
-
-def sanetize(text: str) -> str:
-    """Sanitize text by the following steps:
-    1. delete all new lines
-    2. replace piling whitespaces with single ones
-    3. deleting the unicode character `\uf075 `
+def read_pdf(path: str) -> tuple[list[str], list[str]]:
+    """Open a PDF file from a given path and return seperate lists of strings for the first page and the remaining pages.
 
     Args:
-        text (str): Input text to clean.
+        path (str): Path to the PDF file to read.
 
     Returns:
-        str: Cleaned text.
+        list[str]: List of all lines from the first page as string.
+        list[str]: List of all lines from the remaining pages as string.
     """
-    text = text.replace("\n", "").strip()
-    text = re.sub(" +", " ", text)
-    text = text.replace("\uf075 ", "")
-    return text
+    head_string = io.StringIO()  # output strings
+    body_string = io.StringIO()
 
-
-def pdf_to_text(file_path: str) -> str:
-    """Extrect the text of an pdf from the given path. Hyphens are identifyed by `-\n` and deleted.
-
-    Args:
-        path (str): Path of the PDF to extract the text from.
-
-    Returns:
-        str: Textual contents of th PDF file.
-    """
-    output_string = io.StringIO()
-    with open(file_path, "rb") as in_file:
+    with open(path, "rb") as in_file:
         parser = PDFParser(in_file)
         doc = PDFDocument(parser)
         rsrcmgr = PDFResourceManager()
-        device = TextConverter(rsrcmgr, output_string, laparams=LAParams())
-        interpreter = PDFPageInterpreter(rsrcmgr, device)
+
+        device_head = TextConverter(rsrcmgr, head_string, laparams=LAParams())
+        interpreter_head = PDFPageInterpreter(rsrcmgr, device_head)
+
+        device_body = TextConverter(rsrcmgr, body_string, laparams=LAParams())
+        interpreter_body = PDFPageInterpreter(rsrcmgr, device_body)
+
+        firstpage = True
         for page in PDFPage.create_pages(doc):
-            interpreter.process_page(page)
+            if firstpage:
+                interpreter_head.process_page(page)
+                firstpage = False
+            else:
+                interpreter_body.process_page(page)
 
-    return output_string.getvalue().replace("-\n", "")
+    head = head_string.getvalue().split("\n")
+    body = body_string.getvalue().split("\n")
+    return (head, body)
 
 
-def parse_text(text: str):
-    """Specific parser for the SMC PressBriefing PDFs. Extrects the metadata as well as data
-    from the given text file.
+def parse_head(lines: str) -> dict[str, Any]:
+    metadata: dict[str, Any] = {"person": []}
+    person: dict[str, str] = {}
+    url = False
+    date_pattern = re.compile(r"\d\d\.\d\d\.\d{4}")
+
+    for line in lines:
+        if url:
+            metadata["video_url"] = metadata.get("video_url") + line.strip()  # type: ignore
+        elif line.strip():
+            # date
+            if date_pattern.search(line):
+                metadata["date"] = re.findall(date_pattern, line)[0]
+            # title
+            elif line.strip().startswith("„"):
+                metadata["title"] = line.lstrip()
+            elif line.strip().endswith("“"):
+                metadata["title"] += line.rstrip()
+
+            # url (rarely set at all)
+            elif line.lstrip().startswith("http"):
+                url = True
+                metadata["video_url"] = line.strip()
+
+            # person
+            else:
+                if person.get("name"):
+                    if person["name"].startswith("Moderato"):
+                        line_splits = line.split(",")
+                        person["name"] = line_splits[0]
+                        person["description"] = person.get("description", "") + ",".join(
+                            line_splits[1:]
+                        )
+                    else:
+                        person["description"] = person.get("description", "") + " " + line.strip()
+                else:
+                    person["name"] = line.strip()
+        else:
+            if person.get("description"):
+                metadata["person"].append(person)
+            person = {}
+            url = False
+    return metadata
+
+
+def parse_body(lines: list[str]) -> list[dict[str, str]]:
+    """Parse the transcript body into segments with a speaker, starting timecode and text.capitalize
 
     Args:
-        text (str): Text string on an parsed PDF file.
+        lines (list[str]): List of transcript lines.
 
     Returns:
-        Dict: Structured Press briefing.
+        list[dict[str, str]]: List of segments.
     """
+    timecode_pattern = re.compile(
+        r"\[\d\d:\d\d\]|\(\d\d:\d\d\)|\[\d\d:\d\d:\d\d\]"
+    )  # Re pattern for timecode: [00:00] [00:00:00] (00:00)
 
-    def match_date(line: str):
-        """Match dates in the format xx.xx.xx from a given string. The date is automatcly set
-        as the PressBriefing date and true is returned if successfull.
+    def _get_timecode(line: str):
+        """Extract the timecode of a line."""
+        result = timecode_pattern.search(line)  # check if match exists
+        if result:
+            timecode = re.findall(timecode_pattern, line)
+            return timecode[0]
 
-        Args:
-            line (str): Single line of the PressBriefing
+    def _get_name(line: str):
+        """Extract the speaker name of a line."""
+        result = timecode_pattern.search(line)  # check if match exists
+        if result:
+            line_split = timecode_pattern.split(line)  # split at match
+            name = line_split[0].strip().replace(":", "")
+            return name
 
-        Returns:
-            Bool: True if sucessfull
-        """
-        date: Pattern[str] = re.compile(r"\d+\.\d+\.\d{4}")
-        result: Optional[Match[str]] = date.match(line)
-        if bool(result):  # catch empty results
-            pb["date"] = result.string.strip()  # type: ignore
-            return True
+    passages: list[dict[str, str]] = []
+    current_passage: dict[str, str] = {}
 
-    def match_url(line: str) -> Any:
-        """Match URLs from a given string. The URL is automaticly added as PressBriefing URL.
-
-        Args:
-            line (str): Single line of the PressBriefing
-
-        Returns:
-            Bool: True if sucessfull
-        """
-        url: Pattern[str] = re.compile(
-            r"(https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*))"
-        )
-        result: Optional[Match[str]] = url.search(line)
-        if bool(result):  # catch empty results
-            if "youtube" in result.group(1).strip():  # type: ignore
-                pb["video_url"] = result.group(1).strip()  # type: ignore
-                return True
-            elif "sciencemediacenter" in result.group(1).strip():  # type: ignore
-                pb["pdf_file"] = result.group(1).strip()  # type: ignore
-                return True
-
-    def match_name(line: str) -> Any:
-        """Matches names from the transcripts in a given line. If the line starts with
-        the Unicode Token \uf075 and all following tokens start with uppercase letters the
-        name is metched.
-
-        Args:
-            line (str): Single line of the PressBriefing
-
-        Returns:
-            Str: The extracted name
-        """
-
-        def check_capital_letters(tokens: list[str]):
-            first_letters = []
-            for token in tokens:
-                if token != "":
-                    first_letters.append(token[0])
-            if all(letter.isupper() for letter in first_letters[1:]):
-                return True
-
-        tokens = line.strip().split(" ")
-        if len(tokens) >= 2:
-
-            if tokens[0].startswith(u"\uf075"):
-                if check_capital_letters(tokens[1:]):
-                    return " ".join(tokens).strip()
-            else:
-                if check_capital_letters(tokens):
-                    return line.strip()
-
-    def match_timecode(line: str):
-        """Match and extract the timecode and speaker of a new passage.
-
-        Args:
-            line (str): Single line of the PressBriefing
-
-        Returns:
-            Dict or False: If a new passage could be indecated, a dict is extracted, containing
-            the speaker and timestamp.
-        """
-        timecode: Pattern[str] = re.compile(
-            r"(\[|\()\d+:\d+(:\d+)?(\]|\))"
-        )  # [00:00] [00:00:00] (00:00)
-        results: Optional[Match[str]] = timecode.search(line)
-        if bool(results):  # catch empty results
-            try:
-                passage = {"timestamp": "", "text": "", "speaker": ""}
-                if ":" in results.string.split("[")[0]:  # type: ignore
-                    passage["speaker"] = results.string.split(": ")[0].strip()  # type: ignore
-                    passage["timestamp"] = results.string.split(": ")[1].strip()  # type: ignore
-                else:
-                    tokens = results.string.split(" ")  # type: ignore
-                    passage["speaker"] = " ".join(tokens)[:-1].strip()
-                    passage["timestamp"] = tokens[-1:][0].strip()
-                return passage
-            except:
-                return False
-
-    names = []
-    current_passage: dict[str, list] = {}
-    pb: dict[str, Union[str, list[str]]] = {
-        "title": "",
-        "date": "",
-        "guests": "",
-        "host": "",
-        "video_url": "",
-        "passages": [],
-    }
-
-    lines = text.split("\n")
     for line in lines:
-        if line.strip() != "":
+        if "in der Redaktion" in line:  # stop at imprint page
+            break
+        if name := _get_name(line):
+            if current_passage:  # Save recent passage
+                passages.append(current_passage)
+                current_passage = {}
 
-            if not pb.get("date"):
-                if match_date(line):
-                    continue
+            current_passage["speaker"] = name
+            current_passage["timecode"] = _get_timecode(line)
 
-            if not pb.get("title"):
-                if line.strip().startswith("„"):
-                    pb["title"] = line
-                    continue
+        else:
+            if current_passage.get("text"):
+                current_passage["text"] += line.strip()
+            else:
+                current_passage["text"] = line.strip()
 
-            if pb.get("title"):
-                if not pb.get("title").strip().endswith("“"):  # type: ignore
-                    pb["title"] += line.rstrip()  # type: ignore
-                    continue
-
-            if not pb.get("video_url") or not pb.get("pdf_file"):
-                if match_url(line):
-                    continue
-
-            if match_timecode(line):
-                if current_passage:
-                    pb["passages"].append(current_passage)  # type: ignore
-                current_passage = match_timecode(line)
-                continue
-
-            if current_passage:
-                current_passage["text"] += line
-                if line.strip() == "Ansprechpartner in der Redaktion":
-                    current_passage = {}
-
-    if not pb.get("passages"):  # catch empty passage error
-        raise ValueError("No passages found")
-
-    for passage in pb.get("passages"):  # type: ignore
-        names.append(passage.get("speaker"))  # type: ignore
-    pb["guests"] = list(set(names))
-
-    passages = []
-    for passage in pb.get("passages"):  # type: ignore
-
-        passages.append(
-            {
-                "timestamp": passage.get("timestamp"),  # type: ignore
-                "text": passage.get("text"),  # type: ignore
-                "speaker": passage.get("speaker"),  # type: ignore
-            }
-        )
-
-    pb["title"] = pb.get("title").replace("„", "").replace("“", "")  # type: ignore
-    pb["text"] = sanetize(text)
-    return pb
+    passages.append(current_passage)  # save last passage
+    return passages

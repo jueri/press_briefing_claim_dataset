@@ -100,6 +100,8 @@ def parse_head(lines: str) -> dict[str, Any]:
                 metadata["person"].append(person)
             person = {}
             url = False
+    if title := metadata.get("title"):
+        metadata["title"] = title.replace("„", "").replace("“", "")
     return metadata
 
 

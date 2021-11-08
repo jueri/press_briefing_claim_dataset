@@ -144,3 +144,5 @@ cython_debug/
 .devcontainer/.env
 
 .DS_Store
+
+.vscode 

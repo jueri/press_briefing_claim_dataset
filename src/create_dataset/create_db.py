@@ -114,3 +114,33 @@ def create_tables(connection: sqlite3.Connection):
     )
     """
     db_execute(command, connection)
+
+    # Sentence wikification table
+    command = """CREATE TABLE pb_Wikification_title
+    (
+        pb_wiki_title_ID INTEGER PRIMARY KEY autoincrement,
+        pb_ID int,
+        term text NOT NULL,
+        wiki_num int NOT NULL,
+        confidence real NOT NULL,
+        url text,
+
+        FOREIGN KEY (pb_ID) REFERENCES Press_Briefing (pb_ID)
+    )
+    """
+    db_execute(command, connection)
+
+    # Sentence wikification table
+    command = """CREATE TABLE pb_Wikification_intro
+    (
+        pb_wiki_intro_ID INTEGER PRIMARY KEY autoincrement,
+        pb_ID int,
+        term text NOT NULL,
+        wiki_num int NOT NULL,
+        confidence real NOT NULL,
+        url text,
+
+        FOREIGN KEY (pb_ID) REFERENCES Press_Briefing (pb_ID)
+    )
+    """
+    db_execute(command, connection)

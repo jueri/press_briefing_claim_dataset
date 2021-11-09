@@ -149,9 +149,9 @@ def parse_body(lines: list[str]) -> list[dict[str, str]]:
 
         else:
             if current_passage.get("text"):
-                current_passage["text"] += line.strip()
+                current_passage["text"] += line.lstrip()
             else:
-                current_passage["text"] = line.strip()
+                current_passage["text"] = line.lstrip()
 
     passages.append(current_passage)  # save last passage
     return passages

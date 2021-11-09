@@ -135,7 +135,7 @@ def create_tables(connection: sqlite3.Connection):
     (
         pb_wiki_intro_ID INTEGER PRIMARY KEY autoincrement,
         pb_ID int,
-        term text NOT NULL,
+        term text,
         wiki_num int NOT NULL,
         confidence real NOT NULL,
         url text,

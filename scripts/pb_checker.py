@@ -9,7 +9,7 @@ import os
 import sys
 from typing import Any, Optional
 
-import pandas as pd
+import pandas as pd  # type: ignore
 
 sys.path.append("..")
 from src.create_dataset import parse_pdf

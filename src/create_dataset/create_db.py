@@ -91,9 +91,11 @@ def create_tables(connection: sqlite3.Connection):
     (
         sentence_ID INTEGER PRIMARY KEY autoincrement,
         pb_ID int,
+        segment_ID int,
         sentence text NOT NULL,
 
         FOREIGN KEY (pb_ID) REFERENCES Press_Briefing (pb_ID)
+        FOREIGN KEY (segment_ID) REFERENCES Segment (segment_ID)
     )
     """
     db_execute(command, connection)

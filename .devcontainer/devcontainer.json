@@ -64,6 +64,6 @@
 	"runArgs": [
 		"--name",
 		"pb_statement",
-		// "--env-file",
-		// "${localWorkspaceFolder}/.devcontainer/.env"
+		"--env-file",
+		"${localWorkspaceFolder}/.devcontainer/.env"
 	],}

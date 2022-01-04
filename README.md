@@ -14,8 +14,11 @@ Default directorys and parameter can be defined in [config.py](https://github.co
 The wikification module relies on two wikification services, [Dandelion](https://dandelion.eu/) and [TagMe](https://sobigdata.d4science.org/web/tagme). API keys for these services can be created for free. The wikify module expects the environment variables `DANDELION_TOKEN` and `TAGME_TOKEN`.
 
 ### Content 📋
+Data:
 - [data/SMC_dataset](https://github.com/jueri/SMC_claim_dataset/tree/master/data/SMC_dataset) holds the full dataset as SQLite database and csv tables.
+Code:
 - [src](https://github.com/jueri/SMC_claim_dataset/tree/master/src) conatins main modules to scrape, parse and import the data.
+Notebooks:
 - [create_dataset.ipynb](https://github.com/jueri/SMC_claim_dataset/tree/master/create_dataset.ipynb) guieds through the database creation process.
 - [create_tables.ipynb](https://github.com/jueri/SMC_claim_dataset/tree/master/create_tables.ipynb) guides through the table creation process.
 - [dataset_analysis.ipynb](https://github.com/jueri/SMC_claim_dataset/tree/master/dataset_analysis.ipynb) holds the full analysis of the dataset. 

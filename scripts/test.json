@@ -1,0 +1,272 @@
+[
+    {
+        "data": {
+            "sentence_text": "Transkript",
+            "ref_id": 1,
+            "meta_info": {
+                "title": "Welche nationale Teststrategie bringt uns optimal durch den Winter?"
+            }
+        }
+    },
+    {
+        "data": {
+            "sentence_text": "Herzlich willkommen zum heutigen Press Briefing des Science Media Center.",
+            "ref_id": 2,
+            "meta_info": {
+                "title": "Welche nationale Teststrategie bringt uns optimal durch den Winter?"
+            }
+        }
+    },
+    {
+        "data": {
+            "sentence_text": "Mein Name ist Moderatorin, ich bin Redakteurin für Medizin und Lebenswissenschaften beim Science Media Center Germany.",
+            "ref_id": 3,
+            "meta_info": {
+                "title": "Welche nationale Teststrategie bringt uns optimal durch den Winter?"
+            }
+        }
+    },
+    {
+        "data": {
+            "sentence_text": "Ich begrüße die teilnehmenden Journalisten und die anwesenden Experten, die sich heute hier bereit erklärt haben, für ihre Fragen zur Verfügung zu stehen.",
+            "ref_id": 4,
+            "meta_info": {
+                "title": "Welche nationale Teststrategie bringt uns optimal durch den Winter?"
+            }
+        }
+    },
+    {
+        "data": {
+            "sentence_text": "Der Herbst ist da, die Infektionszahlen steigen und mehrere Landkreise haben die kritische Marke der Inzidenz von 50 Neuinfektionen bereits überschritten.",
+            "ref_id": 5,
+            "meta_info": {
+                "title": "Welche nationale Teststrategie bringt uns optimal durch den Winter?"
+            }
+        }
+    },
+    {
+        "data": {
+            "sentence_text": "Und ein langsamer Anstieg der Neuaufnahmen von COVID-19-Patienten in den Krankenhäusern ist auch schon zu beobachten.",
+            "ref_id": 6,
+            "meta_info": {
+                "title": "Welche nationale Teststrategie bringt uns optimal durch den Winter?"
+            }
+        }
+    },
+    {
+        "data": {
+            "sentence_text": "Solange es keinen Impfstoff gibt und keine Therapie gegen SARS-CoV-2 bleibt die nationale Teststrategie des Bundesministeriums für Gesundheit neben den AHA-Regeln einer der Hauptmechanismen, um die Ausbreitung des Virus einzudämmen.",
+            "ref_id": 7,
+            "meta_info": {
+                "title": "Welche nationale Teststrategie bringt uns optimal durch den Winter?"
+            }
+        }
+    },
+    {
+        "data": {
+            "sentence_text": "Bisher werden in Deutschland pro Woche mehr als eine Million PCR-Tests zur Diagnose von Verdachtsfällen abgerechnet.",
+            "ref_id": 8,
+            "meta_info": {
+                "title": "Welche nationale Teststrategie bringt uns optimal durch den Winter?"
+            }
+        }
+    },
+    {
+        "data": {
+            "sentence_text": "Die Strategie heißt in der Regel, das Symptomträger und eventuell enge Kontaktpersonen getestet werden und direkte Kontaktpersonen von positiv getesteten werden gebeten, sich in Quarantäne zu begeben, um mögliche Infektionsketten zu unterbrechen.",
+            "ref_id": 9,
+            "meta_info": {
+                "title": "Welche nationale Teststrategie bringt uns optimal durch den Winter?"
+            }
+        }
+    },
+    {
+        "data": {
+            "sentence_text": "Was aber, wenn es zu viele Infektionsketten zu verfolgen gibt und wenn das Virus scheinbar überall ist?",
+            "ref_id": 10,
+            "meta_info": {
+                "title": "Welche nationale Teststrategie bringt uns optimal durch den Winter?"
+            }
+        }
+    },
+    {
+        "data": {
+            "sentence_text": "Gesundheitsminister Jens Spahn plant jetzt ab Mitte Oktober eine dritte Verordnung der Teststrategie.",
+            "ref_id": 11,
+            "meta_info": {
+                "title": "Welche nationale Teststrategie bringt uns optimal durch den Winter?"
+            }
+        }
+    },
+    {
+        "data": {
+            "sentence_text": "Als Erweiterung sieht diese primär vor, kostenlose Testungen auszuweiten, weil das Bundesinnenministerium ihnen eine entscheidende Bedeutung für die Eindämmung von Corona- Infektionsketten zuschreibt.",
+            "ref_id": 12,
+            "meta_info": {
+                "title": "Welche nationale Teststrategie bringt uns optimal durch den Winter?"
+            }
+        }
+    },
+    {
+        "data": {
+            "sentence_text": "Laut des Gesundheitsministers sollen ab kommender Woche pro Monat neun Millionen sogenannter Corona-Schnelltests zur Verfügung stehen und die PCR-basierten Tests ergänzen.",
+            "ref_id": 13,
+            "meta_info": {
+                "title": "Welche nationale Teststrategie bringt uns optimal durch den Winter?"
+            }
+        }
+    },
+    {
+        "data": {
+            "sentence_text": "Diese sollen vor allem zur Testung von asymptomatischen engen Kontaktpersonen verwendet werden und verstärkt im Krankenhaus und Pflegebereich eingesetzt werden.",
+            "ref_id": 14,
+            "meta_info": {
+                "title": "Welche nationale Teststrategie bringt uns optimal durch den Winter?"
+            }
+        }
+    },
+    {
+        "data": {
+            "sentence_text": "Allerdings diskutieren auch weitere Bereiche zum Beispiel die Veranstaltungsbranche oder Schulen, wie sie diese Schnelltests nutzen können.",
+            "ref_id": 15,
+            "meta_info": {
+                "title": "Welche nationale Teststrategie bringt uns optimal durch den Winter?"
+            }
+        }
+    },
+    {
+        "data": {
+            "sentence_text": "Wir wollen hier heute in dem virtuellen Press Briefing klären, welche Teststrategien wann sinnvoll sind.",
+            "ref_id": 16,
+            "meta_info": {
+                "title": "Welche nationale Teststrategie bringt uns optimal durch den Winter?"
+            }
+        }
+    },
+    {
+        "data": {
+            "sentence_text": "Und wir wollen erklären, welche Testgüte von den neuen sogenannten Point-of-Care-Tests nach dem Stand der Wissenschaft erwartet werden kann, bei welchen Personengruppen macht eine erweiterte Teststrategie denn aus wissenschaftlicher Sicht überhaupt Sinn.",
+            "ref_id": 17,
+            "meta_info": {
+                "title": "Welche nationale Teststrategie bringt uns optimal durch den Winter?"
+            }
+        }
+    },
+    {
+        "data": {
+            "sentence_text": "Diese Fragen und Ihre wollen wir jetzt klären.",
+            "ref_id": 18,
+            "meta_info": {
+                "title": "Welche nationale Teststrategie bringt uns optimal durch den Winter?"
+            }
+        }
+    },
+    {
+        "data": {
+            "sentence_text": "Ich bitte Sie, Ihre Fragen im Chat zu stellen.",
+            "ref_id": 19,
+            "meta_info": {
+                "title": "Welche nationale Teststrategie bringt uns optimal durch den Winter?"
+            }
+        }
+    },
+    {
+        "data": {
+            "sentence_text": "Bitte wählen Sie die Option an alle Teilnehmer, so dass mein Kollege die Fragen auch sammeln und an mich weiterreichen kann.",
+            "ref_id": 20,
+            "meta_info": {
+                "title": "Welche nationale Teststrategie bringt uns optimal durch den Winter?"
+            }
+        }
+    },
+    {
+        "data": {
+            "sentence_text": "Damit möchte ich jetzt auch Frau Professorin Dr. Sandra Ciesek kommen.",
+            "ref_id": 21,
+            "meta_info": {
+                "title": "Welche nationale Teststrategie bringt uns optimal durch den Winter?"
+            }
+        }
+    },
+    {
+        "data": {
+            "sentence_text": "Sie ist Direktorin des Instituts für medizinische Virologie am Universitätsklinikum Frankfurt sowie Professorin für Medizinische Virologie an der Goethe-Universität in Frankfurt.",
+            "ref_id": 22,
+            "meta_info": {
+                "title": "Welche nationale Teststrategie bringt uns optimal durch den Winter?"
+            }
+        }
+    },
+    {
+        "data": {
+            "sentence_text": "Hallo, Frau Ciesek.",
+            "ref_id": 23,
+            "meta_info": {
+                "title": "Welche nationale Teststrategie bringt uns optimal durch den Winter?"
+            }
+        }
+    },
+    {
+        "data": {
+            "sentence_text": "Halten Sie es angesichts steigender Fallzahlen für sinnvoll, die Teststrategie um Schnelltest auf bestimmte Gruppen zu erweitern und wenn ja, wo sollten diese Antigen-Tests denn prioritär verwendet werden?",
+            "ref_id": 24,
+            "meta_info": {
+                "title": "Welche nationale Teststrategie bringt uns optimal durch den Winter?"
+            }
+        }
+    },
+    {
+        "data": {
+            "sentence_text": "Das macht auf jeden Fall Sinn.",
+            "ref_id": 25,
+            "meta_info": {
+                "title": "Welche nationale Teststrategie bringt uns optimal durch den Winter?"
+            }
+        }
+    },
+    {
+        "data": {
+            "sentence_text": "Aber ich möchte nochmal betonen, dass aus meiner Sicht PCR weiterhin der Goldstandard bleibt, gerade für die Abklärung von symptomatischen Patienten zur Stellung einer Diagnose.",
+            "ref_id": 26,
+            "meta_info": {
+                "title": "Welche nationale Teststrategie bringt uns optimal durch den Winter?"
+            }
+        }
+    },
+    {
+        "data": {
+            "sentence_text": "Die Antigen-Tests sind eher dazu da, um Fremdschutz zu betreiben und ein Antigen-Test sollte nur dann als Alternative verwendet werden, wenn die PCR (Polymerase-Kettenreaktion) nicht zeitnah möglich ist.",
+            "ref_id": 27,
+            "meta_info": {
+                "title": "Welche nationale Teststrategie bringt uns optimal durch den Winter?"
+            }
+        }
+    },
+    {
+        "data": {
+            "sentence_text": "Wo kann man das einsetzen?",
+            "ref_id": 28,
+            "meta_info": {
+                "title": "Welche nationale Teststrategie bringt uns optimal durch den Winter?"
+            }
+        }
+    },
+    {
+        "data": {
+            "sentence_text": "Zum Beispiel bei asymptomatischen Menschen, die einen Besuch im Altenheim planen.",
+            "ref_id": 29,
+            "meta_info": {
+                "title": "Welche nationale Teststrategie bringt uns optimal durch den Winter?"
+            }
+        }
+    },
+    {
+        "data": {
+            "sentence_text": "Hier macht das Sinn, dass für eine begrenzte Zeitdauer dieser Test dann eine Gültigkeit hat und man das 2 Risiko minimiert, dass die Virusinfektion in ein Altenheim getragen wird, das ist mit dem Fremdschutz gemeint.",
+            "ref_id": 30,
+            "meta_info": {
+                "title": "Welche nationale Teststrategie bringt uns optimal durch den Winter?"
+            }
+        }
+    }
+]

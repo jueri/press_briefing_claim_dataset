@@ -7,6 +7,8 @@ This repo holds a [Visual Studio Code (VS Code)](https://code.visualstudio.com/)
 Alternatively, can the dependencies be installed using with the following command:
 `pip install -r .devcontainer/requirements.txt`
 
+Default directorys and parameter can be specified in [config.py](https://github.com/jueri/SMC_claim_dataset/tree/master/config.py).
+
 The wikification module relies on two wikification services, [Dandelion](https://dandelion.eu/) and [TagMe](https://sobigdata.d4science.org/web/tagme). API keys for these services can be created for free. The wikify module expects the environment variables `DANDELION_TOKEN` and `TAGME_TOKEN`.
 
 ### Content 📋
@@ -17,4 +19,5 @@ The wikification module relies on two wikification services, [Dandelion](https:/
 - [dataset_analysis.ipynb](https://github.com/jueri/SMC_claim_dataset/tree/master/dataset_analysis.ipynb) holds the full analysis of the dataset. 
 
 ### Dataset 💾
+Since these repository is not public available, the full dataset can be found in the `data` directory. The SQLite database `dataset.db` has the following structure:
 ![database](doc/static/db.png)

@@ -16,8 +16,12 @@ The wikification module relies on two wikification services, [Dandelion](https:/
 ### Content 📋
 Data:
 - [data/SMC_dataset](https://github.com/jueri/SMC_claim_dataset/tree/master/data/SMC_dataset) holds the full dataset as SQLite database and csv tables.
+- [data/SMC_dataset/pre_labeled](https://github.com/jueri/SMC_claim_dataset/tree/master/data/SMC_dataset/pre_labeled) holds pre labeled dataset slices that are ready for labeling.
+- [data/SMC_dataset/labeled](https://github.com/jueri/SMC_claim_dataset/tree/master/data/SMC_dataset/labeled) holds labeled dataset slices.
+
 Code:
 - [src](https://github.com/jueri/SMC_claim_dataset/tree/master/src) conatins main modules to scrape, parse and import the data.
+
 Notebooks:
 - [create_dataset.ipynb](https://github.com/jueri/SMC_claim_dataset/tree/master/create_dataset.ipynb) guieds through the database creation process.
 - [create_tables.ipynb](https://github.com/jueri/SMC_claim_dataset/tree/master/create_tables.ipynb) guides through the table creation process.

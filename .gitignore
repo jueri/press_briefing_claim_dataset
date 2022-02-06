@@ -151,6 +151,7 @@ pdf
 nltk_data
 
 
-data/SMC_dataset/CE-ACL_processed_de_g.csv
 data/SMC_dataset/claim_sentence_search_de_g.csv
-data/SMC_dataset/dataset_complete_claims.csv
+data/SMC_dataset/SMC_1000.csv
+data/SMC_dataset/SMC_2000.csv
+data/SMC_dataset/SMC_Full.csv

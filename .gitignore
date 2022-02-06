@@ -141,6 +141,7 @@ cython_debug/
 
 # My Files 
 # data/
+.devcontainer
 .devcontainer/.env
 
 .DS_Store
@@ -148,7 +149,6 @@ cython_debug/
 .vscode 
 pdf
 nltk_data
-.devcontainer
 
 
 .data/SMC_dataset/CE-ACL_processed_de_g.csv

@@ -148,3 +148,9 @@ cython_debug/
 .vscode 
 pdf
 nltk_data
+.devcontainer
+
+
+.data/SMC_dataset/CE-ACL_processed_de_g.csv
+.data/SMC_dataset/claim_sentence_search_de_g.csv
+.data/SMC_dataset/dataset_complete_claims.csv

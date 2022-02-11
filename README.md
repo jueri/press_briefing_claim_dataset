@@ -1,5 +1,6 @@
 # The press briefing claim dataset
-![GitHub Pipenv locked Python version](https://img.shields.io/github/pipenv/locked/python-version/jueri/press_briefing_claim_dataset)
+![GitHub Pipenv locked Python version](https://img.shields.io/github/pipenv/locked/python-version/jueri/press_briefing_claim_dataset) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6047551.svg)](https://doi.org/10.5281/zenodo.6047551)
+
 
 ### 💡 Info:
 This repository holds the code to create the press briefing claim dataset. The main modules can be found in the [src](https://github.com/jueri/press_briefing_claim_dataset/src) directory. Three notebooks in the root directory interface these modules and guide through the dataset creation process.

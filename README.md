@@ -3,7 +3,7 @@
 
 
 ### 💡 Info:
-This repository holds the code to create the press briefing claim dataset. The main modules can be found in the [src](https://github.com/jueri/press_briefing_claim_dataset/src) directory. Three notebooks in the root directory interface these modules and guide through the dataset creation process.
+This repository holds the code to create the press briefing claim dataset. The main modules can be found in the [src](https://github.com/jueri/press_briefing_claim_dataset/src) directory. Three notebooks in the root directory interface these modules and guides through the dataset creation process.
 
 This repository is part of my bachelore theses with the title **Automated statement extractionfrom press briefings**. For more indepth information see the [Statement Extractor](https://github.com/jueri/statement_extractor) repository.
 
